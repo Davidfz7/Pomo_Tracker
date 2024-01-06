@@ -1,0 +1,71 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Long+Cang&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 90vh;
+    border: solid black;
+}
+body{
+    font-family: 'Long Cang', cursive;
+}
+#title-goal{
+    font-size: 50px;
+    display: flex;
+    margin: auto;
+}
+
+
+
+
+
+/*All table related*/
+.calendar-container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    border: solid black;
+}
+
+
+
+#calendar-month{
+    align-self: center;
+}
+#calendar-month h1{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+/*Calendar table style*/
+#calendar {
+    border-collapse: collapse;
+}
+
+#calendar th {
+    font-size: 40px;
+    color: rgb(0, 0, 0);  
+}
+
+#calendar td {
+    border: 2px solid black; 
+    font-size: 20px;
+    text-align: center;
+    height: 50px;  
+    width: 50px;
+}
+
+#calendar tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#calendar td:hover{
+    background-color: rgb(3, 193, 3);
+}
+
