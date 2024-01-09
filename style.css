@@ -69,3 +69,11 @@ body{
     background-color: rgb(3, 193, 3);
 }
 
+/*Dialog config*/
+
+#cellInfo{
+    background-color: white;
+    position: relative; 
+    width: 100px;
+    height: 100px;
+}
