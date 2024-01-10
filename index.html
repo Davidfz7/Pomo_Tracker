@@ -27,16 +27,38 @@
           </tr>
           <tr>
             <td style="border: none; background-color: white"></td>
-            <td id="cellInfo">01 <dialog open>Hello world</dialog></td>
+            <td>01</td>
             <td>02</td>
             <td>03</td>
             <td>04</td>
-            <td style="background-color: rgb(0, 170, 0);" >05</td>
+            <td style="background-color: rgb(0, 170, 0)">05</td>
             <td>06</td>
           </tr>
         </table>
       </div>
+      <dialog id="cell-info-dialog">
+        <div id="color-scale" class="color-scale">
+        </div>
+        <form class="cell-info-form">
+          <label class="cell-info-label"
+                 for="horasLectura">Horas de lectura realizadas:</label>
+          <input class="cell-info-input"  type="text" id="horasLectura" name="horasLectura" />
+
+          <label class="cell-info-label" for="horasProgramacion">Horas de programación:</label>
+          <input
+            class="cell-info-input"
+            type="text"
+            id="horasProgramacion"
+            name="horasProgramacion"
+            
+          />
+          <div class="button-forms">
+             <button class="cell-info-button"  type="submit">Submit</button>        
+          </div>
+                    
+        </form>
+      </dialog>
     </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

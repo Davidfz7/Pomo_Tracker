@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Triangular</title>
+  <style>
+    .cursor {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid black;
+      transform-origin: center bottom;
+    }
+
+    .container {
+      position: relative;
+      height: 200px;
+      background-color: #f4f4f4;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Contenido de tu página aquí -->
+    <div class="cursor"></div>
+  </div>
+</body>
+</html>
