@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pomo Tracker</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div id="title-goal">
-        <h1>2024 Pomo Tracking</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomo Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div id="title-goal">
+      <h1>2024 Pomo Tracking</h1>
+    </div>
+    <div class="calendar-container">
+      <div id="calendar-month">
+        <h1>January</h1>
       </div>
-      <div class="calendar-container">
-        <div id="calendar-month">
-          <h1>January</h1>
-        </div>
-        <table id="calendar">
-          <tr>
-            <th>S</th>
-            <th>M</th>
-            <th>T</th>
-            <th>W</th>
-            <th>T</th>
-            <th>F</th>
-            <th>S</th>
-          </tr>
-          <tr>
-            <td style="border: none; background-color: white"></td>
-            <td>01</td>
-            <td>02</td>
-            <td>03</td>
-            <td>04</td>
-            <td style="background-color: rgb(0, 170, 0)">05</td>
-            <td>06</td>
-          </tr>
-        </table>
+      <table id="calendar">
+        <tr>
+          <th>S</th>
+          <th>M</th>
+          <th>T</th>
+          <th>W</th>
+          <th>T</th>
+          <th>F</th>
+          <th>S</th>
+        </tr>
+        <tr>
+          <td style="border: none; background-color: white"></td>
+          <td>01</td>
+          <td>02</td>
+          <td>03</td>
+          <td>04</td>
+          <td style="background-color: rgb(0, 170, 0)">05</td>
+          <td>06</td>
+        </tr>
+      </table>
+    </div>
+    <dialog id="cell-info-dialog">
+      <div id="color-scale" class="color-scale">
       </div>
-      <dialog id="cell-info-dialog">
-        <div id="color-scale" class="color-scale">
-        </div>
-        <form class="cell-info-form">
-          <label class="cell-info-label"
-                 for="horasLectura">Horas de lectura realizadas:</label>
-          <input class="cell-info-input"  type="text" id="horasLectura" name="horasLectura" />
+      <div class="form-dialog-info">
+        <form class="cell-info-form" id="cell-info-form" onsubmit="return false">
+          <label class="cell-info-label" for="horasLectura">Horas de lectura realizadas:</label>
+          <input class="cell-info-input" type="text" id="horasLectura" name="horasLectura" required />
 
           <label class="cell-info-label" for="horasProgramacion">Horas de programación:</label>
-          <input
-            class="cell-info-input"
-            type="text"
-            id="horasProgramacion"
-            name="horasProgramacion"
-            
-          />
+          <input class="cell-info-input" type="text" id="horasProgramacion" name="horasProgramacion" required />
           <div class="button-forms">
-             <button class="cell-info-button"  type="submit">Submit</button>        
+            <button class="cell-info-button" type="submit" onclick="saveData()">Submit</button>
           </div>
-                    
         </form>
-      </dialog>
+      </div>
+    </dialog>
+    <div>
+      <button id="btn-purge" onclick="resetAll()">PURGE INFO</button>
     </div>
-    <script src="script.js"></script>
-  </body>
+
+    <dialog id="stored-data-dialog">
+      <div id="color-scale-result" class="color-scale-result">
+      </div>
+      <div class="table-results-pomo">
+        <table class="pomo-result-table">
+          <thead>
+            <tr>
+              <th>Programming Hours</th>
+              <th>Reading Hours</th>
+              <th>Tasks duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10</td>
+              <td>5</td>
+              <td>15</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </dialog>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
