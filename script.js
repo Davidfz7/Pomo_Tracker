@@ -2,6 +2,7 @@ var counter = 6;
 var extraCounter = 0;
 var table   = document.getElementById("calendar");
 var optionPressed;
+var selectedMonth;
 var monthsList = [
     "january",
     "february",
@@ -54,7 +55,7 @@ var cells = table.getElementsByTagName("td");
 for(var i = 0; i< cells.length; i++){
    (function(index){
         cells[index].addEventListener("click", function() {
-            var selectedMonth;
+           
             for(var i = 0; i < monthMetaData["registers"].length; i++){
                 selectedMonth = i;
             }
@@ -94,30 +95,47 @@ for(var i = 0; i < colors.length; i++){
     colorScaleResult.appendChild(newDivResult);
 }
 
-
+ 
 function saveData(){
-    var programmingHours = document.getElementById('horasProgramacion').value;
-    var readingHours = document.getElementById('horasLectura').value;
-    var monthNumber;
-    var formData = {
-        "day": parseInt(optionPressed[1]),
-        "programming" : programmingHours,
-        "reading": readingHours,
-        "status-day": "closed"
+    var activityName = document.getElementById('activity-dropdown').value;
+    var activityHours = document.getElementById('activity-hours').value;
+    var apiURL = "http://localhost:8080/api/v1/save";
+    console.log("Veamos esto: ", optionPressed[1]);
+    if((selectedMonth+1) < 10){
+        var selectedDate = `2024-0${selectedMonth+1}-${optionPressed[1]}`;
+    }else{
+        var selectedDate = `2024-${selectedMonth+1}-${optionPressed[1]}`;
+   
     }
-
-    var objectStored = JSON.parse(localStorage.getItem('monthMetaData'));   
-    var months = objectStored["registers"];
-    for(var i = 0; i < monthsList.length; i++){
-        if(optionPressed[0] === monthsList[i]){
-            monthNumber = i;
-        }
-
+   
+    var activityData ={
+        "activityType": activityName,
+        "hoursCount":  parseInt(activityHours), 
+        "dateRecorded": selectedDate
+    };
+    console.log(activityData);
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(activityData)
     }
-    addDataToMonth(months[monthNumber], formData); 
-    localStorage.removeItem("monthMetaData");
-    localStorage.setItem("monthMetaData", JSON.stringify(objectStored));
-    dialogg.close();
+    fetch(apiURL, requestOptions)
+        .then(response => {
+            if(!response.ok){
+                throw new Error('Error')
+            }
+            console.log("a ver desde aqui: ", response);
+            return response.json();
+        })
+        .then(data => {
+            console.log("Server response: ", data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+ 
 }
 
 function addDataToMonth(month, activyData){

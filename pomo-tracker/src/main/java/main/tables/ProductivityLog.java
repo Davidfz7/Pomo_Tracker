@@ -13,6 +13,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,4 +31,20 @@ public class ProductivityLog {
     @Temporal(TemporalType.DATE)
     @Column(name = "date_recorded", nullable = false)
     private Date dateRecorded;
+    
+    @Override
+    public String toString(){
+        String jsonFormat = """
+            {
+                "id": %d,
+                "activityType": "%s",
+                "hoursCount": %d,
+                "dateRecorded": "%s"
+            }
+        """;
+        String formattedJson = String.format(jsonFormat, this.getId(), this.getActivityType(),
+                                                               this.hoursCount, this.dateRecorded);
+        
+        return formattedJson;
+    }
 }
