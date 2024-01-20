@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,13 @@ public class ProductivityLog {
     private int hoursCount;
     @Temporal(TemporalType.DATE)
     @Column(name = "date_recorded", nullable = false)
-    private Date dateRecorded;
+    private LocalDate dateRecorded;
+   
+    public ProductivityLog(String activityType, int hoursCount, LocalDate dateRecorded){
+        this.activityType = activityType;
+        this.hoursCount = hoursCount;
+        this.dateRecorded = dateRecorded;
+    }
     
     @Override
     public String toString(){
@@ -43,8 +49,7 @@ public class ProductivityLog {
             }
         """;
         String formattedJson = String.format(jsonFormat, this.getId(), this.getActivityType(),
-                                                               this.hoursCount, this.dateRecorded);
-        
+                                                               this.hoursCount, this.dateRecorded);   
         return formattedJson;
     }
 }

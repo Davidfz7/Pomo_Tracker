@@ -1,8 +1,9 @@
-
 package main.controllers;
 
 import java.time.LocalDate;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import main.dto.ProductivityLogDTO;
 import main.tables.ProductivityLog;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,19 +18,27 @@ import main.services.productivity_log.ProductivityLogService;
 @RequiredArgsConstructor
 @CrossOrigin
 public class ProductivityController {
-    
+
     private final ProductivityLogService productivityLogService;
+
     @GetMapping("/sayhi")
-    public String getTest(){
-        return "Hi David";    
+    public String getTest() {
+        return "Hi David";
     }
-    
+
     @PostMapping("/save")
-    public String test(@RequestBody ProductivityLog productivityLog ){
-        System.out.println("Aqui broteeeer " + productivityLog.getDateRecorded().toString());
-        productivityLog.setDateRecorded("");
-        
-        productivityLogService.saveDay(productivityLog);
-        return productivityLog.toString();
+    public String test(@RequestBody ProductivityLogDTO productivityLogDTO) {
+        String activityType = productivityLogDTO.getActivityType();
+        LocalDate dateRecorded = productivityLogDTO.getDateRecordedAsLocalDate();
+        int hoursCount = productivityLogDTO.getHoursCount();
+        ProductivityLog prodTable = productivityLogService.findByActivityTypeAndDateRecorded(activityType, dateRecorded);
+        if(prodTable == null){
+            ProductivityLog rowValue = new ProductivityLog(activityType, hoursCount, dateRecorded);
+            productivityLogService.saveDay(rowValue);
+            return "Data_saved";
+        }
+        prodTable.setHoursCount(hoursCount);
+        productivityLogService.saveDay(prodTable);
+        return "existing_activity_on_date";
     }
 }

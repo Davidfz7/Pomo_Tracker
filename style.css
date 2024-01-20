@@ -22,7 +22,13 @@ body {
 }
 
 /*All table related*/
-.calendar-container {
+.calendar-container{
+  display: grid;
+  border: solid yellow;
+  grid-template-columns: 1fr 1fr;
+
+}
+#month-january {
   display: flex;
   flex-direction: column;
   margin-right: auto;
@@ -30,25 +36,25 @@ body {
   border: solid black;
 }
 
-#calendar-month {
+#calendar-month-title {
   align-self: center;
 }
-#calendar-month h1 {
+#calendar-month-title h1 {
   font-size: 50px;
   font-weight: bold;
 }
 
 /*Calendar table style*/
-#calendar {
+#calendar-table {
   border-collapse: collapse;
 }
 
-#calendar th {
+#calendar-table th {
   font-size: 40px;
   color: rgb(0, 0, 0);
 }
 
-#calendar td {
+#calendar-table td {
   border: 2px solid black;
   font-size: 20px;
   text-align: center;
@@ -56,7 +62,7 @@ body {
   width: 50px;
 }
 
-#calendar tr:nth-child(even) {
+#calendar-table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
