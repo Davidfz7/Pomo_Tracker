@@ -1,4 +1,5 @@
 var table = document.getElementById("calendar-table");
+console.log("This is a normal table", table);
 var monthContainer = document.getElementById("month-january");
 var calendarContainer = document.getElementById("calendar-container");
 var optionPressed;
@@ -6,16 +7,16 @@ var selectedMonth;
 var monthsList = [
   "january",
   "february",
-  //   "march",
-  //   "april",
-  //   "may",
-  //   "june",
-  //   "july",
-  //   "august",
-  //   "september",
-  //   "october",
-  //   "november",
-  //   "december",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
 ];
 
 function getMonthData() {
@@ -30,34 +31,15 @@ function getMonthData() {
 
 function paintMonths(monthsData) {
   console.log(monthsData);
-  //  for(var i = 0; i < monthsList.length; i++){
-  //   var month         = monthsData["months"][i];
-  //   var counter       = 0;
-  //   var row           = table.insertRow();
-  //   var extraCounter  = 0;
-  //   var doit          = false;
-
-  //   while(counter < month["days"]){
-  //     console.log(counter)
-  //     if(month["name"] === "January"){
-  //       if(extraCounter == 7){
-  //         row = table.insertRow();
-  //       }
-  //       extraCounter += 1;
-  //       counter += 1;
-  //     }else{
-
-  //       counter++;
-  //     }
-  //   }
-  // }
   for (var i = 0; i < monthsList.length; i++) {
     var month = monthsData["months"][i];
     var counter = 0;
     var row = table.insertRow();
+    var rowForTheRest;
     var extraCounter = 0;
     var doit = false;
     var whoDaTable;
+    var doitDummy = true;
     while (counter < month["days"]) {
       if (month["number"] === 1) {
         if (extraCounter == 7) {
@@ -84,34 +66,37 @@ function paintMonths(monthsData) {
         }
       } else {
         if (counter == 0) {
-          applyStyles(month)
-          whoDaTable = document.getElementById(`month-${month["name"]}`) ;
+          applyStyles(month);
+          whoDaTable = document.getElementById(`month-${month["name"]}`);
+          whoDaTable = whoDaTable.getElementsByTagName("table")[0];
+          rowForTheRest = whoDaTable.insertRow();
         }
-        console.log(whoDaTable);
         if (extraCounter == 7) {
-          var row = whoDaTable.insertRow();
+          rowForTheRest = whoDaTable.insertRow();
           extraCounter = 0;
         }
         extraCounter += 1;
         counter += 1;
-        if (counter == month["startingDay"] && doit == false) {
-          var cell = row.insertCell();
+        if (counter != month["startingDay"] && doit == false) {
+          var cell = rowForTheRest.insertCell();
           cell.style.backgroundColor = "white";
           cell.style.border = "none";
-          counter = 0;
-          doit = true;
         } else {
-          var cell = row.insertCell();
+          doit = true;
+
+          if (doit == true && doitDummy == true) {
+            counter = 1;
+            doitDummy = false;
+          }
+          var cell = rowForTheRest.insertCell();
           if (counter < 10) {
-            cell.id = "january-" + "0" + counter;
+            cell.id = `${month["name"]}-` + "0" + counter;
             cell.innerHTML = "0" + counter;
           } else {
-            cell.id = "january-" + counter;
+            cell.id = `${month["name"]}-` + counter;
             cell.innerHTML = counter;
           }
         }
- 
-        counter++;
       }
     }
   }
@@ -214,33 +199,32 @@ function saveData() {
     });
 }
 function applyStyles(month) {
-  var monthContainerClone = monthContainer.cloneNode(true); 
-  var monthContainerTable = monthContainerClone.getElementsByTagName("table")[0];
-  var monthContainerTitle = monthContainerClone.getElementsByTagName("h1");  
+  var monthContainerClone = monthContainer.cloneNode(true);
+  var monthContainerTable =
+    monthContainerClone.getElementsByTagName("table")[0];
+  var monthContainerTitle = monthContainerClone.getElementsByTagName("h1");
   var rowCount = monthContainerTable.rows.length;
-  monthContainerTitle[0].innerText = capitalizeFirstLetter(`${month["name"]}`);  
+  monthContainerTitle[0].innerText = capitalizeFirstLetter(`${month["name"]}`);
   monthContainerClone.id = `month-${month["name"]}`;
   monthContainerClone.style.display = "flex";
   monthContainerClone.style.flexDirection = "column";
-  monthContainerClone.style.marginRight = "auto"; 
-  monthContainerClone.style.marginLeft  = "auto";
-  monthContainerClone.style.border = "solid black" 
-  for(var i = rowCount -1; i > 0; i--){
+  monthContainerClone.style.marginRight = "auto";
+  monthContainerClone.style.marginLeft = "auto";
+  monthContainerClone.style.marginBottom = "auto";
+//  monthContainerClone.style.border = "solid black";
+  for (var i = rowCount - 1; i > 0; i--) {
     monthContainerTable.deleteRow(i);
-  } 
-  calendarContainer.appendChild(monthContainerClone); 
+  }
+  calendarContainer.appendChild(monthContainerClone);
   return monthContainerClone;
 }
 
-
-
-function capitalizeFirstLetter(str){
-  if(str.length > 0){
+function capitalizeFirstLetter(str) {
+  if (str.length > 0) {
     return str.charAt(0).toUpperCase() + str.slice(1);
-  } else{
-    return str;    
+  } else {
+    return str;
   }
 }
-
 
 getMonthData();

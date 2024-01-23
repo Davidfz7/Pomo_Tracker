@@ -45,6 +45,15 @@ VALUES
     ('Programming', 1, '2024-01-17'),
     
     ('Reading', 0, '2024-01-18'),    
-    ('Programming', 2, '2024-01-18');
+    ('Programming', 2, '2024-01-18'),
+    
+    ('Reading', 0, '2024-01-19'),    
+    ('Programming', 2, '2024-01-19'),
+
+    ('Reading', 0, '2024-01-20'),    
+    ('Programming', 0, '2024-01-20'),
+
+    ('Reading', 0, '2024-01-21'),    
+    ('Programming', 0, '2024-01-21');
     
 

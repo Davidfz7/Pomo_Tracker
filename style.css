@@ -10,7 +10,6 @@ body {
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  border: solid blue;
 }
 #title-goal {
   font-size: 50px;
@@ -18,22 +17,20 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
-  border: solid black;
 }
 
 /*All table related*/
 .calendar-container{
   display: grid;
-  border: solid yellow;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 
 }
 #month-january {
   display: flex;
   flex-direction: column;
   margin-right: auto;
+  margin-left: auto;
   margin-bottom: auto;
-  border: solid black;
 }
 
 #calendar-month-title {
@@ -102,7 +99,7 @@ body {
   font-weight: bold;
 }
 
-.cell-info-input {
+.cell-info-input{
   width: 100%;
   padding: 8px;
   margin-bottom: 16px;
